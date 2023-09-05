@@ -1,0 +1,35 @@
+server:
+  port: ${PORT:9888}
+  session:
+    tracking-modes: cookie
+
+spring:
+  application:
+    name: springboot-sample
+  profiles:
+    active: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sample_schema?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:1q2w3e4r}
+  jpa:
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    com.sfn.cancun.config.RequestLoggingFilter: debug
+    org.hibernate.SQL: debug
